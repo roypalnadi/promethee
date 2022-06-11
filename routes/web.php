@@ -24,3 +24,7 @@ Route::get('/home', 'HomeController@index')->name('home');
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+Route::get('/alternatif', 'HomeController@alternatif')->name('alternatif');
+Route::get('/kriteria', 'HomeController@kriteria')->name('kriteria');
+Route::get('/proses', 'HomeController@proses')->name('proses');
