@@ -2,8 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Alternatif;
-
 class HomeController extends Controller
 {
     /**
@@ -28,48 +26,10 @@ class HomeController extends Controller
         return view('home');
     }
 
-    public function alternatif()
-    {
-        $models = Alternatif::get()
-            ->transform(function ($model, $key) {
-                return [
-                    $key + 1,
-                    $model->nama,
-                    '<nobr>
-                    <a href="https://www.nesabamedia.com" target="_blank">
-                        <button class="btn btn-xs btn-default text-primary mx-1 shadow" title="Edit">
-                            <i class="fa fa-lg fa-fw fa-pen"></i>
-                        </button>
-                    </a>
-                    <button class="btn btn-xs btn-default text-danger mx-1 shadow" title="Delete">
-                        <i class="fa fa-lg fa-fw fa-trash"></i>
-                    </button>
-                    </nobr>',
-                ];
-            });
-
-        $heads = [
-            'No',
-            ['label' => 'Nama', 'width' => 70],
-            'Actions',
-        ];
-
-        $config = [
-            'data' => $models->toArray(),
-            'order' => [[1, 'asc']],
-            'columns' => [null, null, ['orderable' => false]],
-        ];
-
-        return view('alternatif', compact('heads', 'config'));
-    }
-
-    public function kriteria()
-    {
-        return view('kriteria');
-    }
-
     public function proses()
     {
-        return view('kriteria');
+        $result = Promethee::proses();
+
+        return view('proses.index')->with(collect($result)->toArray());
     }
 }
