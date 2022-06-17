@@ -44,6 +44,8 @@
         @endif
 
     </div>
+
+    <x-notification-component/>
 @stop
 
 @section('adminlte_js')

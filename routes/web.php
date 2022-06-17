@@ -23,8 +23,26 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
-
-Route::get('/alternatif', 'HomeController@alternatif')->name('alternatif');
-Route::get('/kriteria', 'HomeController@kriteria')->name('kriteria');
 Route::get('/proses', 'HomeController@proses')->name('proses');
+
+Route::resource('users', 'UserController')
+    ->middleware('auth');
+
+Route::resource('alternatif', 'AlternatifController')
+    ->middleware('auth');
+
+Route::resource('kriteria', 'KriteriaController')
+    ->middleware('auth');
+
+Route::resource('bobot', 'BobotController')
+    ->middleware('auth');
+
+// Route::get('/alternatif', 'HomeController@alternatif')->name('alternatif');
+// Route::get('/kriteria', 'HomeController@kriteria')->name('kriteria');
+// Route::get('/proses', 'HomeController@proses')->name('proses');
+
+Auth::routes();
+
+Route::get('/home', function () {
+    return view('home');
+})->name('home')->middleware('auth');

@@ -259,11 +259,16 @@ return [
         //     'icon' => 'fas fa-fw fa-user',
         // ],
         [
-            'text' => 'Dashboard',
-            'url' => '/home',
-            'icon' => 'fas fa-fw fa-clone',
-            'icon_color' => 'white',
+            'text' => 'User',
+            'url' => '/users',
+            'icon' => 'fa fa-users',
         ],
+        // [
+        //     'text' => 'Dashboard',
+        //     'url' => '/home',
+        //     'icon' => 'fas fa-fw fa-clone',
+        //     'icon_color' => 'white',
+        // ],
         [
             'text' => 'Input Data',
             'icon' => 'fas fa-fw fa-share',
@@ -279,11 +284,16 @@ return [
                     'icon_color' => 'red',
                     'url' => '/kriteria',
                 ],
+                [
+                    'text' => 'Bobot',
+                    'icon_color' => 'red',
+                    'url' => '/bobot',
+                ],
             ],
         ],
         [
             'text' => 'Proses',
-            'url' => '/home',
+            'url' => '/proses',
             'icon' => 'fas fa-fw fa-calculator',
             'icon_color' => 'white',
         ],
@@ -370,12 +380,17 @@ return [
             ],
         ],
         'Sweetalert2' => [
-            'active' => false,
+            'active' => true,
             'files' => [
                 [
                     'type' => 'js',
-                    'asset' => false,
-                    'location' => '//cdn.jsdelivr.net/npm/sweetalert2@8',
+                    'asset' => true,
+                    'location' => '/vendor/sweetalert2/sweetalert2.min.js',
+                ],
+                [
+                    'type' => 'css',
+                    'asset' => true,
+                    'location' => '/vendor/sweetalert2/sweetalert2.min.css',
                 ],
             ],
         ],
