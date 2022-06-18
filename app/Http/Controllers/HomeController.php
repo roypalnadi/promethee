@@ -21,8 +21,15 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $data = Promethee::proses();
+        // $data = Promethee::proses();
 
         return view('home');
+    }
+
+    public function proses()
+    {
+        $result = Promethee::proses();
+
+        return view('proses.index')->with(collect($result)->toArray());
     }
 }

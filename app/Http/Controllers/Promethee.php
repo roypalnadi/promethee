@@ -25,6 +25,8 @@ class Promethee extends Controller
         $proses->getEnteringFlow();
         $proses->getNetFlow();
         $proses->rank();
+
+        return $proses;
     }
 
     public function prepare()
