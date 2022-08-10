@@ -30,7 +30,12 @@
                                 <td>{{$model['alternatif_nama'] ?? null}}</td>
                                 <td>{{$model['kriteria_nama'] ?? null}}</td>
                                 <td>
-                                    <input id="nilai" type="number" name="nilai" value="{{$model['nilai']}}">
+                                    <select class="form-control" name="nilai">
+                                        <option value="">Belum Ada Pilihan (-)</option>
+                                        @foreach ($model['pilihan'] as $item)
+                                        <option value="{{$item['nilai']}}" @if ($item['active']) selected @endif>{{$item['nama']}} ({{$item['nilai']}})</option>
+                                        @endforeach
+                                    </select>
                                 </td>
                                 <td><button type="submit" class="btn btn-primary btn-xs">Edit</button></td>
                             </form>

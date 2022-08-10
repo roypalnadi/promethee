@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Kriteria;
+use App\Pilihan;
 use Illuminate\Http\Request;
 
 class KriteriaController extends Controller
@@ -117,5 +118,36 @@ class KriteriaController extends Controller
 
         return redirect()->route('kriteria.index')
             ->with('success_message', 'Berhasil menghapus data');
+    }
+
+    public function pilihan($id)
+    {
+        $kriteria = Kriteria::find($id);
+        if (!$kriteria) {
+            return redirect()->route('kriteria.index')
+                ->with('error_message', 'Kriteria dengan id'.$id.' tidak ditemukan');
+        }
+
+        $pilihan = Pilihan::where('kriteria_id', $id)->get();
+
+        return view('kriteria.pilihan', [
+            'model' => $kriteria,
+            'modelPilihan' => $pilihan,
+        ]);
+    }
+
+    public function updatePilihan(Request $request)
+    {
+        $pilihan = Pilihan::where('kriteria_id', $request->id)->delete();
+        foreach ($request->pilihan ?? [] as $key => $value) {
+            $pilihan = new Pilihan();
+            $pilihan->kriteria_id = $request->id;
+            $pilihan->nama = $value;
+            $pilihan->nilai = $request->nilai[$key] ?? null;
+            $pilihan->save();
+        }
+
+        return redirect()->route('kriteria.index')
+            ->with('success_message', 'Berhasil mengubah data');
     }
 }

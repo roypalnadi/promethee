@@ -34,6 +34,9 @@ Route::resource('alternatif', 'AlternatifController')
 Route::resource('kriteria', 'KriteriaController')
     ->middleware('auth');
 
+Route::get('/kriteria/{id}/pilihan', 'KriteriaController@pilihan')->name('kriteria.pilihan');
+Route::post('/kriteria/update-pilihan', 'KriteriaController@updatePilihan')->name('kriteria.updatePilihan');
+
 Route::resource('bobot', 'BobotController')
     ->middleware('auth');
 

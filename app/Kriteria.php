@@ -10,4 +10,9 @@ class Kriteria extends Model
     protected $fillable = [
         'nama',
     ];
+
+    public function pilihan()
+    {
+        return $this->hasMany(Pilihan::class, 'kriteria_id', 'id');
+    }
 }

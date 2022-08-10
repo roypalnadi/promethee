@@ -17,7 +17,7 @@ class BobotController extends Controller
     public function index()
     {
         $modelAlternatif = Alternatif::all();
-        $modelKriteria = Kriteria::all();
+        $modelKriteria = Kriteria::with('pilihan')->get();
         $modelBobot = Bobot::all();
 
         $data = [];
@@ -25,6 +25,20 @@ class BobotController extends Controller
             foreach ($modelKriteria as $kriteria) {
                 $bobot = $modelBobot->where('alternatif_id', $alternatif->id)
                     ->where('kriteria_id', $kriteria->id)->first();
+
+                $pilihan = [];
+
+                foreach ($kriteria->pilihan as $p) {
+                    $active = false;
+                    if ($p->nilai == ($bobot->nilai ?? 0)) {
+                        $active = true;
+                    }
+                    $pilihan[] = [
+                        'nama' => $p->nama,
+                        'nilai' => $p->nilai,
+                        'active' => $active,
+                    ];
+                }
                 $data[] = [
                     'alternatif_nama' => $alternatif->nama,
                     'alternatif_id' => $alternatif->id,
@@ -32,6 +46,8 @@ class BobotController extends Controller
                     'kriteria_id' => $kriteria->id,
                     'nilai' => $bobot->nilai ?? 0,
                     'id' => $bobot->id ?? null,
+                    'pilihan' => $pilihan,
+                    'pilihanCount' => count($pilihan),
                 ];
             }
         }

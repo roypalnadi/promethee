@@ -25,6 +25,9 @@
                                 <td>{{$key+1}}</td>
                                 <td>{{$model->nama}}</td>
                                 <td>
+                                    <a href="{{route('kriteria.pilihan', $model)}}" class="btn btn-success btn-xs">
+                                        Pilihan
+                                    </a>
                                     <a href="{{route('kriteria.edit', $model)}}" class="btn btn-primary btn-xs">
                                         Edit
                                     </a>
